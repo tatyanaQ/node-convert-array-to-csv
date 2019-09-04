@@ -1,5 +1,6 @@
 
 import { checkSpecialCharsAndEmpty } from './check-special-chars-and-empty';
+import { checkStringFromDigits } from './check-string-from-digits';
 
 const separatorOrLineBreak = (length, elementIdx, separator) => (
   length - 1 === elementIdx ? '\n' : separator
@@ -12,9 +13,15 @@ const escapeDoubleQuotesInsideElement = (element) => {
 };
 
 const appendElement = (element, lineLength, elementIdx, separator) => {
-  const includesSpecials = checkSpecialCharsAndEmpty(element);
+  const isDigitString = checkStringFromDigits(element);
 
   let thisElement = element;
+
+  if (isDigitString) {
+    thisElement = `="${thisElement}"`;
+  } 
+
+  const includesSpecials = checkSpecialCharsAndEmpty(thisElement);  
 
   if (includesSpecials) {
     thisElement = escapeDoubleQuotesInsideElement(thisElement);
