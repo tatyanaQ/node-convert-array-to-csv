@@ -6,4 +6,3 @@ test
 .travis.yml
 yarn.lock
 package-lock.json
-src
