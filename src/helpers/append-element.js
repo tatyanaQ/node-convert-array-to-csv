@@ -1,6 +1,6 @@
 
 import { checkSpecialCharsAndEmpty } from './check-special-chars-and-empty';
-import { checkStringFromDigits } from './check-string-from-digits';
+import { customCoverages } from './custom-transform';
 
 const separatorOrLineBreak = (length, elementIdx, separator) => (
   length - 1 === elementIdx ? '\n' : separator
@@ -13,13 +13,7 @@ const escapeDoubleQuotesInsideElement = (element) => {
 };
 
 const appendElement = (element, lineLength, elementIdx, separator) => {
-  const isDigitString = checkStringFromDigits(element);
-
-  let thisElement = element;
-
-  if (isDigitString) {
-    thisElement = `="${thisElement}"`;
-  } 
+  let thisElement = customCoverages(element);
 
   const includesSpecials = checkSpecialCharsAndEmpty(thisElement);  
 
